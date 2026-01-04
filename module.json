@@ -1,0 +1,42 @@
+{
+  "id": "card-deck-initiative",
+  "title": "Card Deck Initiative",
+  "version": "1.0.0",
+  "description": "<p>Replaces standard initiative with a SWADE-style Card Deck draw using Foundry's Cards API.</p>",
+  "authors": [
+    {
+      "name": "shrade",
+      "email": "shrade.root@gmail.com",
+      "url": "https://ko-fi.com/shrade_himself",
+      "discord": "shrade_himself",
+      "flags": {}
+    }
+  ],
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "esmodules": [
+    "scripts/init.js"
+  ],
+  "styles": [
+    {
+      "src": "styles/initiative.css"
+    }
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json",
+      "flags": {}
+    },
+    {
+      "lang": "ru",
+      "name": "Russian",
+      "path": "lang/ru.json",
+      "flags": {}
+    }
+  ],
+  "flags": {}
+}

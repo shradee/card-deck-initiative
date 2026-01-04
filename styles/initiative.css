@@ -1,0 +1,361 @@
+/* Root container for the initiative block */
+.initiative-card-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Slightly reduced gap for tighter look */
+    justify-content: flex-end; /* Align to the right */
+    overflow: visible;
+    height: 100%;
+    width: 100%; /* Ensure it takes full width to align right */
+}
+
+/* Base style for our custom buttons */
+.initiative-card-button {
+    width: 42px !important; 
+    height: 42px !important; 
+    line-height: 42px !important;
+    flex: 0 0 42px !important;
+    min-width: 42px !important;
+    min-height: 42px !important;
+    padding: 0 !important;
+    margin: 0 2px !important;
+    border: 1px solid #7a7971 !important;
+    border-radius: 3px !important;
+    background: rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 0 2px rgba(0,0,0,0.5) !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-image: none !important;
+    position: relative !important;
+    z-index: 5 !important;
+}
+
+.initiative-card-button img {
+    width: 32px !important;
+    height: 32px !important;
+    filter: brightness(0) invert(1) !important; /* Pure white */
+    border: none !important;
+    display: block !important;
+    margin: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.initiative-card-button:hover {
+    box-shadow: 0 0 5px gold !important;
+    border: 1px solid gold !important;
+    filter: drop-shadow(0 0 10px gold) !important;
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Clear any system-applied icons, fonts, or backgrounds on our buttons or their parents */
+.initiative-card-button::before,
+.initiative-card-button::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Hide any original icons in roll buttons */
+.initiative-card-button i,
+.initiative-card-button svg {
+    display: none !important;
+}
+
+/* Text Styling - Vertical alignment */
+.initiative-card-text {
+    font-weight: bold;
+    font-size: 1.4em;
+    font-family: "Modesto Condensed", "Palatino Linotype", serif;
+    text-shadow: 1px 1px 2px #000, 0 0 5px #fff;
+    white-space: nowrap;
+    color: #eee;
+    pointer-events: none;
+    line-height: 1; /* Help with vertical alignment */
+}
+
+/* Container refinement */
+.module-initiative-container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important; /* Align content to the right */
+    min-width: 42px;
+    height: 100%;
+    margin-right: 2px;
+    flex: 0 0 auto !important;
+    position: relative;
+    padding-right: 5px !important;
+    overflow: visible !important;
+    z-index: 10 !important;
+}
+
+/* HIDE SYSTEM ROLL BUTTONS AND INITIATIVE TEXT AGGRESSIVELY */
+#combat-tracker .combatant .roll, 
+#combat-tracker .combatant .combatant-control[data-control="rollInitiative"],
+#combat-tracker .combatant [data-action="rollInitiative"],
+#combat-tracker .combatant .initiative-roll,
+#combat-tracker .combatant .token-initiative:not(.module-initiative-container),
+#combat-tracker .combatant .initiative:not(.module-initiative-container),
+#combat-tracker .combatant .initiative-value,
+#combat-tracker .combatant .initiative-text,
+#combat-tracker .combatant button.roll:not(.module-injected-roll),
+#combat-tracker .combatant a.roll:not(.module-injected-roll),
+#combat-tracker .combatant .combatant-control.roll:not(.module-injected-roll) {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Ensure our injected container and buttons ARE visible */
+#combat-tracker .combatant .module-initiative-container,
+#combat-tracker .module-initiative-container .module-injected-roll,
+#combat-tracker .module-initiative-container .initiative-card-button,
+#combat-tracker .encounter-controls .module-injected-roll-all {
+    display: inline-flex !important;
+    visibility: visible !important;
+    width: auto !important;
+    height: auto !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+/* Aggressively hide any icon tags that might be inside our container from system injection */
+.module-initiative-container i,
+.module-initiative-container svg,
+.module-initiative-container img:not(.initiative-card):not([src*="card-hand.svg"]) {
+    display: none !important;
+}
+
+.module-initiative-container img.initiative-card,
+.module-initiative-container .initiative-card-button img {
+    display: block !important;
+    visibility: visible !important;
+}
+
+.initiative-card-container-inner {
+    position: relative;
+    width: 28px;
+    height: 40px;
+    display: block;
+    cursor: help;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+.initiative-card {
+    height: 40px;
+    width: auto;
+    border: 1px solid #000;
+    border-radius: 3px;
+    background: #222;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    pointer-events: none;
+}
+
+/* PORTAL STYLING */
+#card-initiative-portal {
+    pointer-events: none;
+    z-index: 1000000;
+    position: fixed;
+    border: 2px solid gold;
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(0,0,0,1);
+    background: #222;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.5);
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                opacity 0.2s ease-out,
+                visibility 0.2s ease-out;
+    transform-origin: right center;
+}
+
+#card-initiative-portal.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+}
+
+/* Universal Combatant Row Adjustments */
+#combat-tracker .combatant,
+#combat-tracker [data-combatant-id] {
+    position: relative !important;
+    overflow: visible !important;
+}
+
+/* Turn Controls (Daggerheart Navigation) */
+.module-injected-nav button {
+    background: rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid #444 !important;
+    color: #eee !important;
+    padding: 5px 15px !important;
+    cursor: pointer !important;
+    border-radius: 4px !important;
+}
+
+/* Daggerheart specific: remove spotlight button */
+.combat-sidebar .spotlight-control,
+.combat-tracker .spotlight-control,
+[data-action="toggleSpotlight"],
+[data-action="requestSpotlight"],
+.spotlight-control,
+button.spotlight-control,
+.combatant button[data-action*="Spotlight"],
+.combat-tracker .combatant-controls + button {
+    display: none !important;
+}
+
+/* JOKER EFFECTS */
+@keyframes joker-pulse {
+    0% { box-shadow: inset 0 0 10px gold; }
+    50% { box-shadow: inset 0 0 20px gold, 0 0 10px gold; }
+    100% { box-shadow: inset 0 0 10px gold; }
+}
+
+[data-combatant-id].has-joker {
+    animation: joker-pulse 2s infinite ease-in-out;
+    animation-delay: var(--anim-delay-2s, 0s) !important; /* Sync Trick */
+    border-left: 3px solid gold !important;
+}
+
+[data-combatant-id].has-joker .initiative-card-text {
+    color: gold !important;
+    text-shadow: 0 0 8px orange, 1px 1px 2px black !important;
+}
+
+[data-combatant-id].has-joker .initiative-card-container-inner::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border: 2px solid gold;
+    border-radius: 5px;
+    animation: flare-rotate 3s infinite linear;
+    animation-delay: var(--anim-delay-3s, 0s) !important; /* Sync Trick */
+    box-shadow: 0 0 10px gold;
+    z-index: -1;
+}
+
+[data-combatant-id].has-joker {
+    animation: joker-pulse 2s infinite ease-in-out;
+    animation-delay: var(--anim-delay-2s, 0s) !important; /* Sync Trick */
+    border-left: 3px solid gold !important;
+}
+
+[data-combatant-id].has-joker .initiative-card-text {
+    color: gold !important;
+    text-shadow: 0 0 8px orange, 1px 1px 2px black !important;
+}
+
+[data-combatant-id].has-joker .initiative-card-container-inner::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border: 2px solid gold;
+    border-radius: 5px;
+    animation: flare-rotate 3s infinite linear;
+    animation-delay: var(--anim-delay-3s, 0s) !important; /* Sync Trick */
+    box-shadow: 0 0 10px gold;
+    z-index: -1;
+}
+
+@keyframes flare-rotate {
+    0% { filter: hue-rotate(0deg) brightness(1); }
+    50% { filter: hue-rotate(180deg) brightness(1.5); }
+    100% { filter: hue-rotate(360deg) brightness(1); }
+}
+
+/* JOKER SPLASH SCREEN EFFECT */
+#joker-splash-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 2000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.joker-splash-bar {
+    position: absolute;
+    width: 150%;
+    min-height: 120px;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.8), rgba(255, 215, 0, 0.8), transparent);
+    transform: rotate(-15deg) translateX(-150%);
+    box-shadow: 0 0 50px gold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 3px solid gold;
+    border-bottom: 3px solid gold;
+    transition: none;
+    padding: 20px 0;
+}
+
+.joker-splash-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 20px;
+    opacity: 0;
+    transform: scale(0.5);
+    max-width: 90%;
+}
+
+.joker-splash-token {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid gold;
+    box-shadow: 0 0 15px black;
+    background: #222;
+}
+
+.joker-splash-message {
+    font-family: "Modesto Condensed", "Palatino Linotype", serif;
+    font-size: 4em;
+    color: white;
+    text-shadow: 0 0 10px black, 0 0 20px gold;
+    white-space: nowrap;
+}
+
+@keyframes splash-slide {
+    0% { transform: rotate(-15deg) translateX(-120%); }
+    20% { transform: rotate(-15deg) translateX(0%); }
+    80% { transform: rotate(-15deg) translateX(0%); }
+    100% { transform: rotate(-15deg) translateX(120%); }
+}
+
+@keyframes content-fade {
+    0% { opacity: 0; transform: scale(0.5); }
+    25% { opacity: 1; transform: scale(1.1); }
+    30% { opacity: 1; transform: scale(1.0); }
+    75% { opacity: 1; transform: scale(1.0); }
+    100% { opacity: 0; transform: scale(1.2); }
+}
+
+#joker-splash-overlay.active .joker-splash-bar {
+    animation: splash-slide 4s forwards cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+#joker-splash-overlay.active .joker-splash-content {
+    animation: content-fade 4s forwards linear;
+}

@@ -1,0 +1,21 @@
+{
+  "CARD_INITIATIVE.SettingDeckNameName": "Название колоды инициативы",
+  "CARD_INITIATIVE.SettingDeckNameHint": "Точное название колоды, используемой для инициативы.",
+  "CARD_INITIATIVE.SettingAutoRedrawName": "Авто-раздача каждый раунд",
+  "CARD_INITIATIVE.SettingAutoRedrawHint": "Автоматически раздавать новые карты всем участникам в начале каждого нового раунда.",
+  "CARD_INITIATIVE.SettingResetInitiativeName": "Сброс инициативы в новом раунде",
+  "CARD_INITIATIVE.SettingResetInitiativeHint": "Очищать карты инициативы в начале каждого нового раунда (если авто-раздача выключена). Если выключено, инициатива сохраняется.",
+  "CARD_INITIATIVE.SettingResetOnEndName": "Удалять колоду при завершении боя",
+  "CARD_INITIATIVE.SettingResetOnEndHint": "Автоматически удалять колоду инициативы и стопку сброса при удалении боевой сцены.",
+  "CARD_INITIATIVE.SettingEnableSplashName": "Включить уведомление вытягивания Джокера",
+  "CARD_INITIATIVE.SettingEnableSplashHint": "Если включено, показывает уведомление на весь экран и проигрывает звук, когда вытаскивается Джокер.",
+  "CARD_INITIATIVE.SettingSfxPathName": "Путь к звуку уведомления карты Джокера",
+  "CARD_INITIATIVE.SettingSfxPathHint": "Путь к звуковому файлу, который проигрывается при вытаскивания Джокера. По умолчанию используется sfx.mp3 модуля.",
+  "CARD_INITIATIVE.ErrorDeckNotFound": "Card Deck Initiative: Колода '{deckName}' не найдена! Проверьте настройки.",
+  "CARD_INITIATIVE.ErrorDeckEmpty": "Card Deck Initiative: Колода пуста и не может быть перетасована!",
+  "CARD_INITIATIVE.JokerDrawnSingle": "{name} ВЫТЯНУЛ ДЖОКЕРА!",
+  "CARD_INITIATIVE.JokerDrawnPlural": "{name} ВЫТЯНУЛИ ДЖОКЕРА!",
+  "CARD_INITIATIVE.And": "и",
+  "COMBAT.RollAll": "Бросить всё",
+  "COMBAT.InitiativeRoll": "Бросить инициативу"
+}
