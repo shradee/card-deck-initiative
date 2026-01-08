@@ -53,10 +53,35 @@ Hooks.once("init", () => {
         default: `modules/${MODULE_ID}/sounds/sfx.mp3`,
         filePicker: "audio"
     });
+    game.settings.register(MODULE_ID, "fontFamily", {
+        name: "CARD_INITIATIVE.SettingFontFamilyName",
+        hint: "CARD_INITIATIVE.SettingFontFamilyHint",
+        scope: "client",
+        config: true,
+        type: String,
+        choices: {
+            "Modesto Condensed": "Modesto Condensed",
+            "Roboto": "Roboto",
+            "Arial": "Arial",
+            "Courier New": "Courier New",
+            "Georgia": "Georgia",
+            "Times New Roman": "Times New Roman",
+            "Verdana": "Verdana",
+            "Signika": "Signika"
+        },
+        default: "Modesto Condensed",
+        onChange: (value) => {
+            document.documentElement.style.setProperty("--card-initiative-font", `"${value}", serif`);
+        }
+    });
 });
 Hooks.once("setup", () => {
 });
 Hooks.once("ready", async () => {
+    // Apply font setting
+    const font = game.settings.get(MODULE_ID, "fontFamily");
+    document.documentElement.style.setProperty("--card-initiative-font", `"${font}", serif`);
+
     CardInitiative.init();
     CardInitiativeUI.init();
 });

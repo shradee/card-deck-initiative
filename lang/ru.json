@@ -11,6 +11,8 @@
   "CARD_INITIATIVE.SettingEnableSplashHint": "Если включено, показывает уведомление на весь экран и проигрывает звук, когда вытаскивается Джокер.",
   "CARD_INITIATIVE.SettingSfxPathName": "Путь к звуку уведомления карты Джокера",
   "CARD_INITIATIVE.SettingSfxPathHint": "Путь к звуковому файлу, который проигрывается при вытаскивания Джокера. По умолчанию используется sfx.mp3 модуля.",
+  "CARD_INITIATIVE.SettingFontFamilyName": "Шрифт инициативы",
+  "CARD_INITIATIVE.SettingFontFamilyHint": "Выберите шрифт для чисел инициативы и уведомления Джокера.",
   "CARD_INITIATIVE.ErrorDeckNotFound": "Card Deck Initiative: Колода '{deckName}' не найдена! Проверьте настройки.",
   "CARD_INITIATIVE.ErrorDeckEmpty": "Card Deck Initiative: Колода пуста и не может быть перетасована!",
   "CARD_INITIATIVE.JokerDrawnSingle": "{name} ВЫТЯНУЛ ДЖОКЕРА!",

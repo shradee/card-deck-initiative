@@ -1,3 +1,20 @@
+/* Ensure Modesto Condensed is available even if the system doesn't load it */
+@font-face {
+    font-family: "Modesto Condensed";
+    src: url("../../../fonts/modesto-condensed/modesto-condensed.woff2") format("woff2"),
+         url("../../../fonts/modesto-condensed/modesto-condensed.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Modesto Condensed";
+    src: url("../../../fonts/modesto-condensed/modesto-condensed-bold.woff2") format("woff2"),
+         url("../../../fonts/modesto-condensed/modesto-condensed-bold.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+}
+
 /* Root container for the initiative block */
 .initiative-card-wrapper {
     position: relative;
@@ -69,7 +86,7 @@
 .initiative-card-text {
     font-weight: bold;
     font-size: 1.4em;
-    font-family: "Modesto Condensed", "Palatino Linotype", serif;
+    font-family: var(--card-initiative-font, "Modesto Condensed", serif) !important;
     text-shadow: 1px 1px 2px #000, 0 0 5px #fff;
     white-space: nowrap;
     color: #eee;
@@ -278,6 +295,22 @@ button.spotlight-control,
     100% { filter: hue-rotate(360deg) brightness(1); }
 }
 
+@font-face {
+    font-family: "Modesto Condensed";
+    src: url("../../../fonts/modesto-condensed/modesto-condensed.woff2") format("woff2"),
+         url("../../../fonts/modesto-condensed/modesto-condensed.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Modesto Condensed";
+    src: url("../../../fonts/modesto-condensed/modesto-condensed-bold.woff2") format("woff2"),
+         url("../../../fonts/modesto-condensed/modesto-condensed-bold.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+}
+
 /* JOKER SPLASH SCREEN EFFECT */
 #joker-splash-overlay {
     position: fixed;
@@ -330,7 +363,7 @@ button.spotlight-control,
 }
 
 .joker-splash-message {
-    font-family: "Modesto Condensed", "Palatino Linotype", serif;
+    font-family: var(--card-initiative-font, "Modesto Condensed", serif) !important;
     font-size: 4em;
     color: white;
     text-shadow: 0 0 10px black, 0 0 20px gold;

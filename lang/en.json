@@ -11,6 +11,8 @@
   "CARD_INITIATIVE.SettingEnableSplashHint": "If enabled, shows a splash screen and plays a sound when a Joker is drawn.",
   "CARD_INITIATIVE.SettingSfxPathName": "Joker Splash Sound Path",
   "CARD_INITIATIVE.SettingSfxPathHint": "Path to the sound file to play when a Joker is drawn. Defaults to module's sfx.mp3.",
+  "CARD_INITIATIVE.SettingFontFamilyName": "Initiative Font",
+  "CARD_INITIATIVE.SettingFontFamilyHint": "Select the font used for initiative numbers and the Joker splash screen.",
   "CARD_INITIATIVE.ErrorDeckNotFound": "Card Deck Initiative: Deck '{deckName}' not found! Please check your settings.",
   "CARD_INITIATIVE.ErrorDeckEmpty": "Card Deck Initiative: Deck is empty and cannot be reshuffled!",
   "CARD_INITIATIVE.JokerDrawnSingle": "{name} DREW A JOKER!",

@@ -1,7 +1,7 @@
 {
   "id": "card-deck-initiative",
   "title": "Card Deck Initiative",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "<p>Replaces standard initiative with a SWADE-style Card Deck draw using Foundry's Cards API.</p>",
   "authors": [
     {

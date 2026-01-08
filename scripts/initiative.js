@@ -10,13 +10,19 @@ export class CardInitiative {
         };
         const customRollAll = async function(options) {
             const combat = this;
-            const ids = combat.combatants.map(c => c.id);
-            return await combat.rollInitiative(ids, options);
+            const ids = combat.combatants.filter(c => c.initiative === null || c.initiative === undefined).map(c => c.id);
+            if (ids.length > 0) {
+                return await combat.rollInitiative(ids, options);
+            }
+            return combat;
         };
         const customRollNPC = async function(options) {
             const combat = this;
-            const ids = combat.combatants.filter(c => c.isNPC).map(c => c.id);
-            return await combat.rollInitiative(ids, options);
+            const ids = combat.combatants.filter(c => c.isNPC && (c.initiative === null || c.initiative === undefined)).map(c => c.id);
+            if (ids.length > 0) {
+                return await combat.rollInitiative(ids, options);
+            }
+            return combat;
         };
         if (game.modules.get("lib-wrapper")?.active) {
             libWrapper.register(MODULE_ID, "CONFIG.Combat.documentClass.prototype.rollInitiative", customRoll, "OVERRIDE");
@@ -43,7 +49,32 @@ export class CardInitiative {
         };
         Hooks.on("updateCombat", CardInitiative.onUpdateCombat);
         Hooks.on("deleteCombat", CardInitiative.onDeleteCombat);
-        Hooks.on("updateCombatant", CardInitiative.onUpdateCombatant);
+        Hooks.once("ready", CardInitiative.createDeck);
+    }
+    static async createDeck() {
+        if (!game.user.isGM) return;
+        const deckName = game.settings.get(MODULE_ID, "deckName");
+        let deck = game.cards.getName(deckName);
+        if (!deck) {
+            console.log(`${MODULE_ID} | Initializing Deck on Ready`);
+            const { DECK_DATA } = await import("./data.js");
+            const data = JSON.parse(JSON.stringify(DECK_DATA));
+            data.name = deckName;
+            data.ownership = { default: 3 };
+            deck = await Cards.create(data);
+            await deck.shuffle({ chatNotification: false });
+        } else if (deck.ownership.default !== 3) {
+            await deck.update({ "ownership.default": 3 });
+        }
+        
+        const discardName = `${deckName} Discard`;
+        let discard = game.cards.getName(discardName);
+        if (!discard) {
+            console.log(`${MODULE_ID} | Initializing Discard on Ready`);
+            discard = await Cards.create({ name: discardName, type: "pile", ownership: { default: 3 } });
+        } else if (discard.ownership.default !== 3) {
+            await discard.update({ "ownership.default": 3 });
+        }
     }
     static async rollInitiative(ids, ...args) {
         const combat = this;
@@ -72,6 +103,7 @@ export class CardInitiative {
             const { DECK_DATA } = await import("./data.js");
             const data = JSON.parse(JSON.stringify(DECK_DATA));
             data.name = deckName;
+            data.ownership = { default: 3 };
             deck = await Cards.create(data);
             await deck.shuffle({ chatNotification: false });
         }
@@ -79,14 +111,32 @@ export class CardInitiative {
             ui.notifications.error(game.i18n.format("CARD_INITIATIVE.ErrorDeckNotFound", { deckName }));
             return combat;
         }
+        
+        if (game.user.isGM && deck.ownership.default !== 3) {
+            await deck.update({ "ownership.default": 3 });
+        }
+
         const discardName = `${deck.name} Discard`;
-        let discard = game.cards.getName(discardName) || await Cards.create({ name: discardName, type: "pile" });
+        let discard = game.cards.getName(discardName);
+        if (!discard) {
+            discard = await Cards.create({ name: discardName, type: "pile", ownership: { default: 3 } });
+        }
+        
+        if (game.user.isGM && discard.ownership.default !== 3) {
+            await discard.update({ "ownership.default": 3 });
+        }
+        
         let available = deck.cards.filter(c => !c.drawn);
         let isGlobalRoll = combatantIds.length >= combat.combatants.size;
         if (available.length < combatantIds.length) {
             console.log(`${MODULE_ID} | Triggering Reshuffle (Deck Empty)`);
-            await CardInitiative.reshuffleDeck(combat);
-            available = deck.cards.filter(c => !c.drawn);
+            try {
+                await CardInitiative.reshuffleDeck(combat);
+                available = deck.cards.filter(c => !c.drawn);
+            } catch (e) {
+                console.error("Reshuffle failed:", e);
+                return combat;
+            }
         }
         if (available.length === 0) {
             ui.notifications.error(game.i18n.localize("CARD_INITIATIVE.ErrorDeckEmpty"));
@@ -202,11 +252,6 @@ export class CardInitiative {
             if (deck) await deck.delete();
         } finally {
             Hooks.off("preCreateChatMessage", hookId);
-        }
-    }
-    static async onUpdateCombatant(combatant, changes, options, userId) {
-        if (game.user.isGM && "initiative" in changes && changes.initiative === null) {
-            await combatant.update({ [`flags.-=${MODULE_ID}`]: null });
         }
     }
 }
