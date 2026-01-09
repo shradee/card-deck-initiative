@@ -2,7 +2,7 @@
 
 **Card Deck Initiative** replaces the standard d20-based initiative system in Foundry VTT with a card-based draw system, inspired by **Savage Worlds (SWADE)**. It utilizes Foundry's core **Cards API** to manage a deck, discard pile, and hand distribution for initiative.
 
-![Foundry Version](https://img.shields.io/badge/Foundry-v13-orange) ![Downloads](https://img.shields.io/github/downloads/shradee/card-deck-initiative/total)
+![Foundry Version](https://img.shields.io/badge/Foundry-v13-orange) ![Downloads](https://img.shields.io/github/downloads/shradee/card-deck-initiative/total) [Ko-fi](https://ko-fi.com/shrade_himself)
 
 ## Features
 
