@@ -10,6 +10,13 @@
 
 ## Features
 
+
+
+https://github.com/user-attachments/assets/139a5690-72ec-43d8-9d52-b4dd0063e28b
+
+
+
+
 -   **Card-Based Initiative**: Combatants draw cards from a configurable deck instead of rolling dice.
 -   **Deck Management**: Automatically creates a standard 52-card deck (including Jokers) if one doesn't exist. Handles shuffling automatically when the deck runs out.
 -   **Joker Mechanics**:
@@ -23,6 +30,12 @@
     -   Displays the drawn card suit and value on the Combat Tracker.
     -   **Hover Preview**: Hover over the card icon in the tracker to see a large preview of the card.
     -   **Sorting**: Sorts combatants based on card value (King > Queen > ... > 2). Suits are used as tiebreakers (Spades > Hearts > Diamonds > Clubs).
+ 
+
+
+https://github.com/user-attachments/assets/02b4ad01-e219-4b45-9545-5cbfca7a7706
+
+
 
 ## System Support
 
